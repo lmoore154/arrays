@@ -45,3 +45,24 @@ movies.each do |star|
 end
 
 puts "Movies starring Leonardo DiCaprio: #{starring_leo}"
+
+
+def four_words(text)
+  answers = []
+  check_words = text.split
+  check_words.each {|word| answers << word if word.length == 4}
+  return answers
+end
+
+def how_many_nums(text, num)
+  answers =[]
+  check_words = text.split
+  check_words.each {|word| answers << word if word.length == num.to_i}
+  return answers
+end
+
+def total_budget(movies)
+  cost = 0
+  movies.select {|money| cost += money[:budget]}
+  return cost
+end
