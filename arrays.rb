@@ -36,7 +36,6 @@ movies_under_100 = []
 movies.each do |budget|
   movies_under_100 << budget[:title] if budget[:budget] < 100
 end
-
 puts "Movies under 100: #{movies_under_100}"
 
 starring_leo = []
@@ -47,6 +46,7 @@ end
 puts "Movies starring Leonardo DiCaprio: #{starring_leo}"
 
 
+# Starting adventure mode
 def four_words(text)
   answers = []
   check_words = text.split
@@ -55,7 +55,7 @@ def four_words(text)
 end
 
 def how_many_nums(text, num)
-  answers =[]
+  answers = []
   check_words = text.split
   check_words.each {|word| answers << word if word.length == num.to_i}
   return answers
@@ -63,6 +63,47 @@ end
 
 def total_budget(movies)
   cost = 0
-  movies.select {|money| cost += money[:budget]}
+  movies.each {|money| cost += money[:budget]}
   return cost
+end
+
+
+# Starting epic mode question 1
+def names_array(movies)
+  names_array = movies.collect {|name| name[:stars]}.flatten.uniq
+  return names_array
+end
+
+# Please don't grade this part.
+# def starring?(movies, star)
+#   movie_by_star = movies.select {|movie| movie[:stars].include? star}
+#   return movie_by_star.collect {|movie| movie[:title]}
+# end
+#
+# def org_movie_array(movies)
+#   movie_by_actor = []
+#   movie_star_names = names_array(movies)
+#   movie_star_names.each do |name|
+#     movie_titles = starring?(movies, name)
+#     by_star = {:name => "#{name}", :title => movie_titles}
+#   movie_by_actor << by_star
+#   end
+#   return movie_by_actor
+# end
+
+# Okay, these can be graded!
+# Epic mode question 2
+def average_budget(movies)
+  total_budget(movies) / movies.length
+end
+
+# Epic mode question 3
+def median_budget(movies)
+  movie_budgets = movies.collect {|cost| cost[:budget]}
+  movie_budgets.sort!
+  if movie_budgets.length % 2 != 0
+    movie_budgets[movie_budgets.length / 2]
+  else
+    ((movie_budgets[(movie_budgets.length / 2) - 1]) + (movie_budgets[(movie_budgets.length / 2)])) / 2
+  end
 end
